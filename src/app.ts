@@ -139,8 +139,14 @@ class ProjectList {
         this.element = importedNode.firstElementChild as HTMLElement;
         this.element.id = `${this.type}-projects`;
 
-        projectState.addListener((projects: Project[]) => {
-            this.assignedProjects = projects;
+        projectState.addListener((projects: Project[]) => {  
+            const relevantProjects = projects.filter(proj => {
+                if(this.type === 'active') {
+                    return proj.status === ProjectStatus.Active;
+                }
+                return proj.status === ProjectStatus.Finished
+            })
+            this.assignedProjects = relevantProjects;
             this.renderProjects();
         });
 
