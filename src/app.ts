@@ -1,5 +1,7 @@
 import Project from './Project';
 import ProjectStatus from './ProjectStatus';
+import State from './State';
+
 // Drag & Drop Interfaces
 interface Draggable {
     dragStartHandler(event: DragEvent): void;
@@ -14,16 +16,6 @@ interface DragTarget {
 
 
 
-// State management
-type Listener<T> = (items: T[]) => void;
-
-class State<T> {
-    protected listeners: Listener<T>[] = [];
-
-    addListener(listenerFn: Listener<T>) {
-        this.listeners.push(listenerFn);
-    }
-}
 
 class ProjectState extends State<Project> {
     private projects: Project[] = [];
@@ -226,7 +218,8 @@ class ProjectItem extends Component<HTMLUListElement, HTMLLIElement>
 }
 
 // ProjectList class
-class ProjectList extends Component<HTMLDivElement, HTMLElement> {
+class ProjectList extends Component<HTMLDivElement, HTMLElement> 
+    implements DragTarget{
     assignedProjects: Project[];
 
     constructor(private type: 'active' | 'finished') {
