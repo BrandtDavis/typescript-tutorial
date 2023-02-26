@@ -38,8 +38,8 @@ textarea:focus {
 
 button {
   font: inherit;
-  background: #ff0062;
-  border: 1px solid #ff0062;
+  background: #2784cc;
+  border: 1px solid #2784cc;
   cursor: pointer;
   color: white;
   padding: 0.75rem 1rem;
@@ -51,17 +51,17 @@ button:focus {
 
 button:hover,
 button:active {
-  background: #a80041;
-  border-color: #a80041;
+  background: #028ffa;
+  border-color: #2784cc;
 }
 
 .projects {
   margin: 1rem;
-  border: 1px solid #ff0062;
+  border: 1px solid #2784cc;
 }
-
+/* #2fcc3c */
 .projects header {
-  background: #ff0062;
+  background: #0044ff;
   height: 3.5rem;
   display: flex;
   justify-content: center;
@@ -69,11 +69,11 @@ button:active {
 }
 
 #finished-projects {
-  border-color: #0044ff;
+  border-color: #2fcc3c;
 }
 
 #finished-projects header {
-  background: #0044ff;
+  background: #2fcc3c;
 }
 
 .projects h2 {
@@ -100,7 +100,7 @@ button:active {
 }
 
 #finished-projects li h2 {
-  color: #0044ff;
+  color: #2fcc3c;
 }
 
 .projects li h3 {
