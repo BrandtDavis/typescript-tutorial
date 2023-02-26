@@ -1,7 +1,6 @@
 import Project from './Project';
 import ProjectStatus from './ProjectStatus';
 import State from './State';
-import Component from './Component';
 
 // Drag & Drop Interfaces
 interface Draggable {
@@ -133,7 +132,44 @@ function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
 }
 
 // Component Base Class
+abstract class Component<T extends HTMLElement, U extends HTMLElement> {
+    templateElement: HTMLTemplateElement;
+    hostElement: T;
+    element: U;
 
+    constructor(
+        templateId: string, 
+        hostElementId: string, 
+        insertAtStart: boolean,
+        newElementId?: string
+    ) { 
+        this.templateElement = document.getElementById(
+            templateId
+        )! as HTMLTemplateElement;
+        this.hostElement = document.getElementById(hostElementId)! as T;
+
+        const importedNode = document.importNode(
+            this.templateElement.content,
+            true
+        );
+        this.element = importedNode.firstElementChild as U;
+        if(newElementId){
+            this.element.id = newElementId;
+        }
+
+        this.attach(insertAtStart);
+    }
+
+    private attach(insertAtBeginning: boolean) {
+        this.hostElement.insertAdjacentElement(
+            insertAtBeginning ? 'afterbegin' : 'beforeend', 
+            this.element
+        )
+    }
+
+    abstract configure(): void;
+    abstract renderContent(): void;
+}
 
 // ProjectItem Class
 class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> 
@@ -322,6 +358,6 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement>{
     renderContent() {}
 }
 
-// const prjInput = new ProjectInput();
-// const activePrjList = new ProjectList('active')
-// const finishedPrjList = new ProjectList('finished')
+const prjInput = new ProjectInput();
+const activePrjList = new ProjectList('active')
+const finishedPrjList = new ProjectList('finished')
