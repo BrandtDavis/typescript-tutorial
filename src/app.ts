@@ -1,5 +1,3 @@
-import Project from './Project';
-import ProjectStatus from './ProjectStatus';
 // Drag & Drop Interfaces
 interface Draggable {
     dragStartHandler(event: DragEvent): void;
@@ -12,7 +10,21 @@ interface DragTarget {
     dragLeaveHandler(event: DragEvent): void;
 }
 
+// Project Type
+enum ProjectStatus { 
+    Active, 
+    Finished
+}
+class Project {
 
+    constructor(
+        public id: string, 
+        public title: string, 
+        public description: string, 
+        public people: number, 
+        public status: ProjectStatus 
+    ) {}
+}
 
 // State management
 type Listener<T> = (items: T[]) => void;
