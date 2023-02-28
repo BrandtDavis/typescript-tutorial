@@ -371,24 +371,25 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement>{
     }
 
     private toggleViewHandler() {
-        const activeProjectList = document.getElementById('active-projects-list');
-        const finishedProjectList = document.getElementById('finished-projects-list');
+        const activeProjectList = document.getElementById('active-projects');
+        const finishedProjectList = document.getElementById('finished-projects');
 
-        if(activeProjectList?.style.display === 'None' &&
-           finishedProjectList?.style.display === 'None') 
+        if(activeProjectList?.style.display === 'none' &&
+           finishedProjectList?.style.display === 'none') 
         {
-            activeProjectList.style.display = 'Block';
-            finishedProjectList.style.display = 'Block';
+            activeProjectList.style.display = 'block';
+            finishedProjectList.style.display = 'block';
         }
         else {
-            activeProjectList!.style.display = 'None';
-            finishedProjectList!.style.display = 'None';
+            activeProjectList!.style.display = 'none';
+            finishedProjectList!.style.display = 'none';
         }
 
     }
 
     configure() {
         this.element.addEventListener('submit', this.submitHandler.bind(this));
+        document.getElementById('toggle-projects')?.addEventListener('click', this.toggleViewHandler)
     }
     
     renderContent() {}
